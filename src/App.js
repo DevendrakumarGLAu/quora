@@ -1,5 +1,5 @@
 import './App.css';
-import Quora from './components/Quora';
+import Quora from './components/quora/Quora';
 
 function App() {
   return (
