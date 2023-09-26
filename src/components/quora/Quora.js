@@ -1,6 +1,6 @@
 import React from 'react' 
 import '../quora/Quora.css' 
-import Header from '../header'
+import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import Feed from '../feed/Feed'
 import Widget from '../Widget/Widget'
