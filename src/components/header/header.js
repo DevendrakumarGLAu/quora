@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import "../header/header.css";
 import {
+  ExpandMore,
   FeaturedPlayListOutlined,
   NotificationImportantOutlined,
 } from "@material-ui/icons/";
 import { PeopleAltOutlined } from "@material-ui/icons";
 import { AssignmentTurnedInOutlined } from "@material-ui/icons/";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Input } from "@material-ui/core";
+import Modal from "react-responsive-modal";
+import 'react-responsive-modal/styles.css';
 
-function header() {
+function Header() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const onOpenModal = () => setIsModalOpen(true);
+  const onCloseModal = () => setIsModalOpen(false);
+
   return (
     <div className="header card">
       <nav
@@ -110,13 +118,39 @@ function header() {
               <Avatar
                 style={{ color: "#b92b27", marginLeft: "10px", height: "30px" }}
               />
-              <button
+              <button onClick={onOpenModal}
                 class="btn btn-sm btn-outline-secondary"
                 type="button"
-                style={{ height: "30px" , width: "180px", marginLeft: "30px"}}
+                style={{ height: "30px", width: "180px", marginLeft: "30px" }}
               >
                 Ask Question
               </button>
+              <Modal open={isModalOpen} onClose={onCloseModal} center>
+                <div className="modal_title">
+                  <h5>Add Question</h5>
+                  <h5>share link</h5>
+                  
+                </div>
+                <div className="modal_info">
+                    <Avatar className="avatar"/>
+                    <div className="modal_scope">
+                      <PeopleAltOutlined/>
+                      <p>Public</p>
+                      <ExpandMore/>
+                    </div>
+                </div>
+                <div className="modal_Field">   
+                  <Input type="text" placeholder='Start your question with "Why","How","What",etc'/>
+                  <div style={{display:"flex", flexDirection:"column"}}>
+                    <Input type="text" placeholder='optional: includes a links that gives context to your question'/>
+                  </div>
+                </div>
+                <div className="modal_buttons fixed-bottom d-flex justify-content-end">
+
+                  <button type="button" class="btn btn-danger mx-2" onClick={onCloseModal}>Cancel</button>
+                  <button type="submit" class="btn btn-primary mx-2">Add question</button>
+                </div>
+              </Modal>
             </form>
           </div>
         </div>
@@ -125,4 +159,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;
