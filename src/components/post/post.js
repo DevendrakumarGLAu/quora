@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
 import {
     ArrowDownwardOutlined,
@@ -10,8 +9,17 @@ import {
     ShareOutlined,
 } from "@material-ui/icons";
 import "../post/post.css";
+import Modal from "react-responsive-modal";
+import 'react-responsive-modal/styles.css';
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
-function post() {
+function Post() {
+
+    const [IsModalOpen, setIsModalOpen] = useState(false);
+    const onOpenModal = () => setIsModalOpen(true);
+    const onCloseModal = () => setIsModalOpen(false);
+
     return (
         <div className="post">
             <div className="post_info">
@@ -22,7 +30,25 @@ function post() {
             <div className="post_body">
                 <div className="post_question">
                 <p>This is test question</p>
-                <button className="post_btnAnswer">Answer</button>
+                <button onClick={onOpenModal} className="post_btnAnswer">Answer</button>
+                    <Modal open={IsModalOpen} onClose={onCloseModal} center>
+                        <div className="post_modal ">
+                        <Avatar/>
+                        <h5>username</h5>
+                    </div>
+                    <div className="modal_question">
+                        <h1>write your question</h1>
+                            <p>asked by {""}</p><span>  </span>{""}on {""}timestamp
+                    </div>
+                    <div className="modal_answer">
+                        <ReactQuill placeholder="write your answer here"/>
+                    </div>
+                        <div className="modal_buttons fixed-bottom d-flex justify-content-end">
+
+                            <button type="button" class="btn btn-danger mx-2" onClick={onCloseModal}>Cancel</button>
+                            <button type="submit" class="btn btn-primary mx-2">Add question</button>
+                        </div>
+                </Modal>
             </div>
             </div>
                 <div className="post_footer">
@@ -60,4 +86,4 @@ function post() {
     );
 }
 
-export default post;
+export default Post;

@@ -17,6 +17,10 @@ function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onOpenModal = () => setIsModalOpen(true);
   const onCloseModal = () => setIsModalOpen(false);
+  // for input
+  const [inputUrl, setInputUrl] = useState("");
+
+  
 
   return (
     <div className="header card">
@@ -142,7 +146,11 @@ function Header() {
                 <div className="modal_Field">   
                   <Input type="text" placeholder='Start your question with "Why","How","What",etc'/>
                   <div style={{display:"flex", flexDirection:"column"}}>
-                    <Input type="text" placeholder='optional: includes a links that gives context to your question'/>
+                    <Input type="text" value={inputUrl} onChange={(e) => setInputUrl(e.target.value)} 
+                    placeholder='optional: includes a links that gives context to your question'/>
+                    {
+                      inputUrl !== "" && <img src={inputUrl} alt="image"  style={{height:"40vh", objectFit:"contain"}}/>
+                    }
                   </div>
                 </div>
                 <div className="modal_buttons fixed-bottom d-flex justify-content-end">
